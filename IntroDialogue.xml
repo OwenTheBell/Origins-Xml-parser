@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<dialogue>
+	<overseer id = "introOS1" nextItem = "player" nextId = "player introPL1">
+		<text>Perillos Capsule</text>
+		<text color='hex color value'> occupant</text>
+		<text>, this is the </text>
+		<text color='hex color value'>MINOS Overseer</text>
+		<text>. Do you copy?</text>
+		<text color='hex color value'> Occupant</text>
+		<text>?</text>
+	</overseer>
+
+<!-- 
+<player id = 'player introPL1'>
+	<option nextItem = 'overseer' nextId = 'introOS1a'>
+		<text>Reporting.</text>
+	</option>
+	<option nextItem ='overseer' nextId = 'introOS1b'>
+		<text>Hello, how are you doing?</text>
+	</option>
+	<option nextItem ='overseer' nextId = 'introOS1c'>
+		<text>Perillos Capsule</text>
+		<text color = 'hex color value'> occupant</text>
+		<text color>is not here right now; would you like to leave a message?</text>
+	</option>
+	<option nextItem ='overseer' nextId = 'introOS1d'>
+		<text>Where am I? What’s going on? Who are you?</text>
+	</option>
+</player>
+<overseer id = 'introOS1a' nextItem = 'player' nextId= 'playerintroPL2'>
+	<text>Excellent, are you comfortable in your capsule?</text>
+</overseer>
+<overseer id = 'introOS1b' nextItem = 'player' nextId= 'playerintroPL2'>
+	<text>A little distressed by your cheeriness at your current situation, but otherwise healthy… 'How are you'?</text>
+</overseer>
+<overseer id = 'introOS1c' nextItem = 'player' nextId= 'playerintroPL2'>
+	<text>Absolutely hilarious,</text>
+	<text color = 'hex color value'>occupant</text>
+	<text>, I can already tell our relationship is destined to blossom. Are you feeling comfortable in your capsule?</text>
+</overseer>
+<overseer id = 'introOS1d' nextItem = 'player' nextId= 'playerintroPL2'>
+	<text>Well it seems you have conveniently forgotten the last dozen hours or so. How fortunate. You are currently aboard a </text>
+	<text color =>Project Daedalus Perillos Capsule</text>
+	<text>. It is designed for a single</text>
+	<text color => occupant </text>
+	<text>under the supervision of an</text>
+	<text color => Overseer </text>
+	<text>to conduct experiments in Earth’s orbit.</text> 
+</overseer>;
+<player id = 'playerintroPL2'>
+	<option nextItem = 'overseer' nextId = 'introOS2a'>
+		<text>Fine, thank you.</text>
+	</option>
+	<option id='introOptionDial1X' nextItem = 'overseer' nextId = 'introOS2b' set= 'introOptionDial1Y'>
+		<text>Fantastic! I’m in space!</text>
+	</option>
+	<option nextItem = 'overseer' nextId = 'introOS2c'>
+		<text>I have a headache.</text>
+	</option>
+<option nextItem = 'overseer' nextId = 'introOS2d'>
+		<text>I’m so confused.</text>
+	</option>
+<overseer id = 'introOS2a' nextItem = 'player' nextId= 'playerintroPL3'>
+	<text>If that ever changes due changes due to stress or the nauseating effects of irregular gravity abroad your capsule, there are pain-relievers located in the restroom. We have also taken the liberty of adding pain-suppressants to your food pellets.</text>
+</overseer>
+<overseer id = 'introOS2b' nextItem = 'player' nextId= 'playerintroPL3'>
+	<text>Yes, quite. I am thrilled that you are so observant.  Is it not a wonderful feeling to know that you are so insignificant in the cosmic scheme? You must be delighted at the prospect of your own triviality in comparison to such intergalactic spectacles. </text>
+</overseer>
+<overseer id = 'introOS2c' nextItem = 'player' nextId= 'playerintroPL3'>
+	<text>There should be some pain-relief pills in the restroom compartment, if you require them. We have also taken the liberty of adding pain-suppressants to your food pellets to account for the disorienting effects of uneven gravity aboard the capsule. </text>
+</overseer>
+<overseer id = 'introOS2d' nextItem = 'player' nextId= 'playerintroPL3'>
+	<text>It is quite alight. All you need to do is do exactly what I tell you to do and things will go well for both of us. </text>
+</overseer>
+<player id = 'player introPL3'>
+	<option nextItem = 'overseer' nextId = 'introOS3'>
+		<text>Thank you.</text>
+	</option>
+	<option nextItem ='overseer' nextId = 'introOS3'>
+		<text>Umm…Thanks for that I guess.</text>
+	</option>
+	<option id= 'introOptionDial1Y' nextItem ='overseer' nextId = 'introOS3' check= 'introOptionDial1X'>
+		<text>Woah! That’s deep, man. Really puts things into perspective.</text>
+	</option>
+</player>
+<overseer id = 'introOS3' nextItem = 'player' nextId= 'playerintroPL4'>
+	<text>You are welcome </text>
+	<text color = 'hex color value'> occupant</text>
+	<text>.</text>
+</overseer>
+<player id = 'player introPL4'>
+	<option nextItem = 'overseer' nextId = 'introOS4a'>
+		<text>I have a name you know.</text>
+	</option>
+	<option id = 'introOptionDial2X' nextItem ='overseer' nextId = 'introOS4b' set = 'introOptionDialY'>
+		<text>Calling me</text>
+		<text color = 'hex color value'> occupant</text>
+		<text> must get boring.</text>
+	</option>
+	<option nextItem = 'overseer' nextId = 'introOS4c'>
+		<text>(say nothing)</text>
+	</option>
+</player>
+<overseer id = 'introOS4a' nextItem = 'player' nextId= 'playerintroPL5'>
+	<text>I will pretend that I care and ask what you would prefer to be called.</text>
+</overseer>
+<overseer id = 'introOS4b' nextItem = 'player' nextId= 'playerintroPL5'>
+	<text>Not at all actually. I enjoy it because it dehumanizes you and makes you easier to study. But I suppose, you are insisting I refer to you as something less…expendable. Though I still think there is really not much benefit to naming lab rats with anything other than titles and numbers, if you catch my meaning.</text>
+</overseer>
+<overseer id = 'introOS4c' nextItem = 'player' nextId= 'introOS7'>
+	<text>Right, let us begin the briefing then. </text>
+</overseer>
+<player id = 'player introPL5'>
+	<option nextItem = 'overseer' nextId = 'introOS5a'>
+		<text>My name is (input name)</text>
+		<popup id='playerPopup1' nextItem = 'overseer' nextId = 'introOS5a'>
+			<text (optional) color='hex color value'></text>
+			<variable id='playerName'></variable>
+			<playerName></playerName>
+			<overseerName></overseerName>
+		</popup>
+		<variable id='playerName' color='hex color value'></variable>
+	</option>
+	<option nextItem = 'overseer' nextId = 'introOS5b'>
+		<text>Well if you are going to be like that, I don't even want to tell you my name!</text>
+	</option>
+	<option id = 'introOptionDial2Y' nextItem ='overseer' nextId = 'introOS5c' check = 'introOptionDialX'>
+		<text>Oh, I see your point. That's a good point.</text>
+	</option>
+</player>
+<overseer id = 'introOS5a' nextItem = 'player' nextId= 'playerintroPL6'>
+	<text>Alright capsule</text>
+	<text (optional) color='hex color value'> occupant </text>
+	<variable id='playerName' color='hex color value'></variable>
+	<text>. Is there anything else I can do to make you feel more at home? Perhaps, read you a bed-time story when you go to sleep or, I know, request that your next supply shipment be full of warm milk and stuffed animals? Would you like me to sing you a lullaby now or can I do that after my vitally important briefing?</text>
+</overseer>
+<overseer id = 'introOS5b' nextItem = 'player' nextId= 'playerintroPL6'>
+	<text>Works for me,</text>
+	<text (optional) color='hex color value'> occupant</text>
+	<text>. Anything else that you would like to complain about before I begin my briefing.</text>
+</overseer>
+<overseer id = 'introOS5c' nextItem = 'player' nextId= 'playerintroPL6'>
+	<text>I know it is,</text>
+	<text (optional) color='hex color value'> occupant</text>
+	<text> I am glad that we agree.</text>
+</overseer>
+<player id = 'player introPL6'>
+	<option nextItem = 'overseer' nextId = 'introOS6a'>
+		<text>One more thing...what 's your name?</text>
+	</option>
+	<option nextItem ='overseer' nextId = 'introOS6b'>
+		<text>Can I name you?</text>
+	</option>
+	<option nextItem = 'overseer' nextId = 'introOS6c'>
+		<text>Nope, I'm good.</text>
+	</option>
+</player>
+<overseer id = 'introOS6a' nextItem = 'overseer' nextId= 'introOS7'>
+	<text>Yes, it is </text>
+	<text (optional) color='hex color value'> Overseer </text>
+	<text>. Overseer </text>
+	<text (optional) color='hex color value'> Overseer </text>
+	<text>. My parents were not overly creative. I am going to start my briefing now.</text>
+</overseer>
+<overseer id = 'introOS6b' nextItem = 'overseer' nextId= 'introOS7'>
+	<text>Does a worm have the right to 'name' an approaching foot? But, I suppose if you MUST for my briefing to begin, you may. We would not want you to feel as if you have been mistreated up in space, correct?</text>
+	<popup id='overseerPopup1' nextItem = 'overseer' nextId = 'introOS7'>
+			<text (optional) color='hex color value'></text>
+			<variable id='overseerName'></variable>
+			<playerName></playerName>
+			<overseerName></overseerName>
+		</popup>
+</overseer>
+<overseer id = 'introOS6c' nextItem = 'overseer' nextId= 'introOS7'>
+	<text>Excellent, I can now begin my briefing. It is quite an exquiste briefing, if I do say so myself. I look forward to briefing you intently and intensely. It is almost oxymoronic, because this briefing is so loaded with information but still brief enough to be a briefing. Allow me a moment to get all my notecards together. Alright, I am ready.</text>
+</overseer>
+<overseer id = 'introOS7' nextItem = 'overseer' nextId= 'introOS8'>
+	<text>As you may know, this capsule and all projects and experiments contained within it are part of</text>
+	<text color='hex color value'>Project Daedalus</text>
+	<text>.</text>
+</overseer>
+<overseer id = 'introOS8' nextItem = 'exit' nextScreen = 'if nextItem is exit then give the id of the screen to eject to'>
+	<text>The Project is what we see as the evolution of the scientific process. By physically isolating promising individuals and providing incentives and advanced equipment, we hope to produce breakthroughs faster and encourage exploration of cutting-edge ideas.</text>
+</overseer>
+<overseer id = 'introOS9' nextItem = 'exit' nextScreen = 'if nextItem is exit then give the id of the screen to eject to'>
+	<text>This capsule, the</text>
+	<text color='hex color value'>Perillos Capsule</text>
+	<text>is designed as an isolated environment to test promising individuals and also allow them to expand their scientific pursuits. As part of the testing experience, several areas of the capsule are currently inaccessible to you until your</text>
+	<text color='hex color value'>Overseer</text>
+	<text> provides clearance.</text>
+</overseer>
+<overseer id = 'introOS10' nextItem = 'exit' nextScreen = 'if nextItem is exit then give the id of the screen to eject to'>
+	<text>The room you are currently in is known as the </text>
+	 <text color='hex color value'>Main Quarter </text>
+          <text> and contains all necessary equipment for your continued healthy existence. You may explore the area at your leisure.</text>
+</overseer>
+<overseer id = 'introOS11' nextItem = 'exit' nextScreen = 'if nextItem is exit then give the id of the screen to eject to'>
+	<text>This room is known as the </text>
+	<text color='hex color value'>Observation Module </text>
+	<text> and will be unlocked now. The room can be accessed by using the hatch-door. This room is your primary research module and operating environment. Report here regularly.</text>
+</overseer>
+<overseer id = 'introOS12' nextItem = 'exit' nextScreen = 'if nextItem is exit then give the id of the screen to eject to'>
+	<text>This room is known as the </text>
+	<text color='hex color value'>Observation Module </text>
+	<text> and will be unlocked now. The room can be accessed by using the hatch-door. This room is your primary research module and operating environment. Report here regularly.</text>
+</overseer>
+<overseer id = 'introOS13' nextItem = 'exit' nextScreen = 'if nextItem is exit then give the id of the screen to eject to'>
+	<text>This </text>
+	<text color='hex color value'>Main Computer </text>
+	<text> contains commuication software, allowing you to converse with either your </text>
+	<text color='hex color value'>Overseer </text>
+	<text>or other </text>
+	<text color='hex color value'>Perillos Capsule occupants </text>
+	<text>stationed in Earth's orbit. They may provide help during experiments but will more likely distact you with needless social exchanges. You may even access information on the other capsules and review their progress in comarison to yours.</text>
+</overseer>
+<overseer id = 'introOS14' nextItem = 'exit' nextScreen = 'if nextItem is exit then give the id of the screen to eject to' highlight='id of what you wanted highlighted'>
+	<text>Here you may see your own progress or change your personal settings </text>
+	<text color='hex color value'>Observation Module </text>
+</overseer>
+<overseer id = 'introOS15' nextItem = 'exit' nextScreen = 'if nextItem is exit then give the id of the screen to eject to'>
+	<text>With the computer-watch you carry you can also access most of the information on the </text>
+	<text color='hex color value'>Main Screen</text>
+	<text> at any time and place aboard you capsule (press button to view Watch Screen)</text>
+</overseer>
+<overseer id = 'introOS16' nextItem = 'player' nextId= 'playerintroPL7'>
+	<text>I will now allow you some time to familarize yoursef with your capsule. Come back to the  </text>
+	<text color='hex color value'>Main Screen </text>
+	<text> once you are satisfied with exploring your surroundings and I will give you your </text>
+	<text color='hex color value'>First Task</text>
+	<text>. </text>
+</overseer>
+<player id = 'player introPL7'>
+	<option nextItem = 'overseer' nextId = 'introOS17a'>
+		<text>Thank you, </text>
+		<variable id='overseerName' color='hex color value'></variable>
+		<text>.</text>
+	</option>
+	<option nextItem = 'overseer' nextId = 'introOS17b'>
+		<text>I'm going to explore this room like a champ!</text>
+	</option>
+	<option nextItem ='overseer' nextId = 'introOS17c'>
+		<text>I'm ready for the </text>
+		<text color='hex color value'>First Task</text>
+		<text> actually.</text>
+	</option>
+</player>
+<overseer id = 'introOS17a' nextItem = 'exit' nextScreen = 'if nextItem is exit then give the id of the screen to eject to'>
+	<text>Just be quick about it.</text>
+</overseer>
+<overseer id = 'introOS17b' nextItem = 'exit' nextScreen = 'if nextItem is exit then give the id of the screen to eject to'>
+	<text>'Like a chimp' is probably more accurate. Enjoy your stay in your cage.</text>
+</overseer>
+<overseer id = 'introOS17c' nextItem = 'overseer' nextID = 'firsttaskOS1'>
+	<text>Very well, I hope you are ready.</text>
+</overseer>
+-->
+</dialogue>
