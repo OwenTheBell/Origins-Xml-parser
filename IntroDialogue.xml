@@ -1,5 +1,5 @@
 <dialogue>
-<overseer id = "introOS1" nextType = "player" nextId = "player introPL1">
+<overseer id = "introOS1" nextType = "player" nextId = "playerintroPL1">
 	<text>Perillos Capsule</text>
 	<text color= "hex color value"> occupant</text> 
 	<text>, this is the</text>
@@ -8,7 +8,7 @@
 	<text color = "hex color value"> Occupant</text>
 	<text>?</text>
 </overseer>
-<player id = "player introPL1">
+<player id = "playerintroPL1">
 	<option nextType = "overseer" nextId = "introOS1a">
 		<text>Reporting.</text>
 	</option>
@@ -70,7 +70,7 @@
 <overseer id = "introOS2d" nextType = "player" nextId= "playerintroPL3">
 	<text>It is quite alight. All you need to do is do exactly what I tell you to do and things will go well for both of us. </text>
 </overseer>
-<player id = "player introPL3">
+<player id = "playerintroPL3">
 	<option nextType = "overseer" nextId = "introOS3">
 		<text>Thank you.</text>
 	</option>
@@ -86,7 +86,7 @@
 	<text color = "hex color value"> occupant</text>
 	<text>.</text>
 </overseer>
-<player id = "player introPL4">
+<player id = "playerintroPL4">
 	<option nextType = "overseer" nextId = "introOS4a">
 		<text>I have a name you know.</text>
 	</option>
@@ -105,10 +105,10 @@
 <overseer id = "introOS4b" nextType = "player" nextId= "playerintroPL5">
 	<text>Not at all actually. I enjoy it because it dehumanizes you and makes you easier to study. But I suppose, you are insisting I refer to you as something less…expendable. Though I still think there is really not much benefit to naming lab rats with anything other than titles and numbers, if you catch my meaning.</text>
 </overseer>
-<overseer id = "introOS4c" nextType = "player" nextId= "introOS7">
+<overseer id = "introOS4c" nextType = "overseer" nextId= "introOS7">
 	<text>Right, let us begin the briefing then. </text>
 </overseer>
-<player id = "player introPL5">
+<player id = "playerintroPL5">
 	<option nextType = "popup" nextId = "playerPopup1">
 		<text>My name is (input name)</text>
 	</option>
@@ -141,7 +141,7 @@
 	<text color="hex color value"> occupant</text>
 	<text> I am glad that we agree.</text>
 </overseer>
-<player id = "player introPL6">
+<player id = "playerintroPL6">
 	<option nextType = "overseer" nextId = "introOS6a">
 		<text>One more thing...what 's your name?</text>
 	</option>
@@ -226,7 +226,7 @@
 	<text color="hex color value">First Task</text>
 	<text>. </text>
 </overseer>
-<player id = "player introPL7">
+<player id = "playerintroPL7">
 	<option nextType = "overseer" nextId = "introOS17a">
 		<text>Thank you, </text>
 		<variable id="overseerName" color="hex color value"></variable>
@@ -247,13 +247,13 @@
 <overseer id = "introOS17b" nextType = "exit" nextScreen = "if nextType is exit then give the id of the screen to eject to">
 	<text>'Like a chimp' is probably more accurate. Enjoy your stay in your cage.</text>
 </overseer>
-<overseer id = "introOS17c" nextType = "overseer" nextID = "firsttaskOS1">
+<overseer id = "introOS17c" nextType = "overseer" nextId = "firsttaskOS1">
 	<text>Very well, I hope you are ready.</text>
 </overseer>
 <overseer id = "introOS18" nextType = "player" nextId= "playerintroPL8"> 
 	<text>Are you ready to begin?</text>
 </overseer>
-<player id = "player introPL8">
+<player id = "playerintroPL8">
 	<option nextType = "overseer" nextId = "introOS19a">
 		<text>I need a little more time to look around.</text>
 	</option>
@@ -270,16 +270,16 @@
 <overseer id = "introOS19a" nextType = "exit" nextScreen = "if nextType is exit then give the id of the screen to eject to">
 	<text>I can see that you enjoy wasting my time. Finish quickly, please.</text>
 </overseer>
-<overseer id = "introOS19b" nextType = "overseer" nextID = "firsttaskOS1">
+<overseer id = "introOS19b" nextType = "overseer" nextId = "firsttaskOS1">
 	<text>Excellent. Let us begin.</text>
 </overseer>
-<overseer id = "introOS19c" nextType = "player" nextID = "introPL9">
+<overseer id = "introOS19c" nextType = "player" nextId = "playerintroPL9">
 	<text>Fine, what are you so curious about?</text>
 </overseer>
-<overseer id = "introOS19d" nextType = "player" nextID = "introPL9">
+<overseer id = "introOS19d" nextType = "player" nextId = "playerintroPL9">
 	<text>Poor aesthetic engineering mostly. I would advise you to not concern yourself with it and trust that any risks to your well-being were considered. Do you have any other meaningful and constructive questions you would like to ask me?</text>
 </overseer>
-<player id = "player introPL9">
+<player id = "playerintroPL9">
 	<option nextType = "overseer" nextId = "introOS20a">
 		<text>Why am I here?</text>
 	</option>
@@ -292,102 +292,102 @@
 	<option nextType ="overseer" nextId = "introOS20d">
 		<text>Are we friends?</text>
 	</option>
-	<option nextType = "overseer" nextID = "firsttaskOS1">
+	<option nextType = "overseer" nextId = "firsttaskOS1">
 		<text> I've heard enough. I'm ready for the </text>
 		<text color="hex color value">First Task</text>
 		<text>.</text>
 	</option>
 </player>
-<overseer id = "introOS20a" nextType = "player" nextID = "introPL10">
+<overseer id = "introOS20a" nextType = "player" nextId = "playerintroPL10">
 	<text>That is the big question, is it not? But I suppose you are being more specific to your own condition. How selfish! Unfortunately, if you do not know, neither do I. They do not forward the personnel history files of subjects to </text>
 	<text color="hex color value">Overseers</text>
 	<text>in order to minimize experimenter bias. I suggest, however, that you use your free-time to concoct an elaborate and facetious backstory to entertain yourself with.</text>
 </overseer>
-<overseer id = "introOS20b" nextType = "player" nextID = "introPL9">
+<overseer id = "introOS20b" nextType = "player" nextId = "playerintroPL9">
 	<text>You are best off not concerning yourself with that question.</text>
 </overseer>
-<overseer id = "introOS20c" nextType = "player" nextID = "introPL12">
+<overseer id = "introOS20c" nextType = "player" nextId = "playerintroPL12">
 	<text>There is a quite simple explanation for that anomaly. You see, the Perillos capsule is rotated continually by the central </text>
 	<text color="hex color value">Core Engine </text>
 	<text>which forms a gravitational force. With the help of this rotation we can maintain a stable gravity. Even though gravity is stable, the relatively small size of the capsule still means that there is significantly smaller force acting on areas closer to the </text>
 	<text color="hex color value">Core Engine </text>
 	<text> and more force acting on areas further away</text>
 </overseer>
-<overseer id = "introOS20d" nextType = "player" nextID = "introPL9">
+<overseer id = "introOS20d" nextType = "player" nextId = "playerintroPL9">
 	<text>No, we are not friends.</text>
 </overseer>
-<player id = "player introPL10">
+<player id = "playerintroPL10">
 	<option nextType = "overseer" nextId = "introOS21a">
 		<text>Am I a criminal?</text>
 	</option>
 	<option nextType = "overseer" nextId = "introOS21b">
 		<text>I'm going to have the best backstory ever.</text>
 	</option>
-	<option nextType = "player" nextID = "introPL9">
+	<option nextType = "player" nextId = "playerintroPL9">
 		<text>Okay, I have some more questions though.</text>
 	</option>
 </player>
-<overseer id = "introOS21a" nextType = "player" nextID = "introPL11">
+<overseer id = "introOS21a" nextType = "player" nextId = "playerintroPL11">
 	<text>Oh no. We stopped sending criminals to space when this project began.  Actually it was a space-isolated criminal who first gave the idea to begin the project. The crafty prisoner somehow managed to turn her craft’s waste exhaust into a crude ion engine in an attempt to escape.</text>
 </overseer>
-<overseer nextType = "player" nextID = "introPL9">
+<overseer id = "introOS21b" nextType = "player" nextId = "playerintroPL9">
 		<text>I am sure you will. You should probably keep it to yourself though; you would not want other people copying your amazing ideas.</text>
 </overseer>
-<player id = "player introPL11">
+<player id = "playerintroPL11">
 	<option nextType = "overseer" nextId = "introOS22a">
 		<text>What happened to the crafty prisoner?</text>
 	</option>
 	<option nextType = "overseer" nextId = "introOS22b">
 		<text>Can I do that with my capsule?</text>
 	</option>
-	<option nextType = "player" nextID = "introPL9">
+	<option nextType = "player" nextId = "playerintroPL9">
 		<text>Okay, I have some more questions.</text>
 	</option>
 </player>
-<overseer id = "introOS22a" nextType = "player" nextID = "introPL9">
+<overseer id = "introOS22a" nextType = "player" nextId = "playerintroPL9">
 	<text>The prisoner splattered her capsule over the surface of the moon. But don’t worry; she had the crater named after her.</text>
 </overseer>
-<overseer id = "introOS22b" nextType = "player" nextID = "introPL9">
+<overseer id = "introOS22b" nextType = "player" nextId = "playerintroPL9">
 	<text>You can try...though you'll probably fail. </text>
 </overseer>
-<player id = "player introPL12">
+<player id = "playerintroPL12">
 	<option nextType = "overseer" nextId = "introOS23a">
 		<text>Are there any side effects to this I should know about?</text>
 	</option>
 	<option nextType = "overseer" nextId = "introOS23b">
 		<text>Can't I just get a bigger capsule then?</text>
 	</option>
-	<option id = "introOptionDial3Y"  nextType = "player" nextID = "introPL9" check = "introOptionDial3Y">
+	<option id = "introOptionDial3Y"  nextType = "player" nextId = "playerintroPL9" check = "introOptionDial3Y">
 		<text>So there is less gravity in the bathroom then?!</text>
 	</option>
-	<option nextType = "player" nextID = "introPL9">
+	<option nextType = "player" nextId = "playerintroPL9">
 		<text>Okay, good enough for me.</text>
 	</option>
 </player>
-<overseer id = "introOS23a" nextType = "player" nextID = "introPL9">
+<overseer id = "introOS23a" nextType = "player" nextId = "playerintroPL9">
 	<text>Some minor side effects…Nausea, asymmetrical digestion, muscle degeneration, skeletal atrophy, heart irregularities, and nasal congestion are the most common reactions. Nothing to really worry about.</text>
 </overseer>
-<overseer id = "introOS23b" nextType = "player" nextID = "introPL9">
+<overseer id = "introOS23b" nextType = "player" nextId = "playerintroPL9">
 	<text>Yes, let me just fill out the request-form for you to receive the two kilometer-wide vessel that it take would correct the gravitational imbalances you are experiencing. I am sure that my superiors will take your application ‘into consideration’.</text>
 </overseer>
-<overseer id = "introOS23c" nextType = "player" nextID = "introPL9">
+<overseer id = "introOS23c" nextType = "player" nextId = "playerintroPL9">
 	<text>Again, I blame poor aesthetic engineering. I am sure that the designers of the </text>
 	 <text color="hex color value">Perillos</text>
 	<text> took your needs into consideration when constructing their product.</text>
 </overseer>
-<overseer id = "firsttaskOS1" nextType = "player" nextID = "firsttaskPL1">
+<overseer id = "firsttaskOS1" nextType = "player" nextId = "playerfirsttaskPL1">
 	<text>The first task is simple. You will assemble your </text>
 	 <text color="hex color value">Personal Assistant Robot</text>
 	<text>.</text>
 </overseer>
-<player id = "player firsttaskPL1">
+<player id = "playerfirsttaskPL1">
 	<option nextType = "overseer" nextId = "firsttaskOS2">
 		<text>Of course.</text>
 	</option>
 	<option nextType = "overseer" nextId = "firsttaskOS2">
 		<text>Out of what? All I have are some books and spare socks.</text>
 	</option>
-	<option  nextType = "player" nextID = "firsttaskOS2">
+	<option  nextType = "overseer" nextId = "firsttaskOS2">
 		<text>Look </text>
 		<variable id="overseerName"></variable>
 		<text> I can't even put oil in my car witout taking it to the mechanic. I don't think I'm cut out for this.</text>
@@ -398,22 +398,22 @@
 	 <text color="hex color value">Main Quarter</text>
 	<text>. Go up to the componet and I will instruct you further.</text>
 </overseer>
-<overseer id = "firsttaskOS2" nextType = "player" nextID = "firsttaskPL2">
+<overseer id = "firsttaskOS2" nextType = "player" nextId = "playerfirsttaskPL2">
 	<text>Please open the storage unit, </text>
 	<variable id="playerName"></variable>
 	<text>.</text>
 </overseer>
-<player id = "player firsttaskPL2">
+<player id = "playerfirsttaskPL2">
 	<option nextType = "overseer" nextId = "firsttaskOS4">
 		<text>Okay. (Open Unit)</text>
 	</option>
 	<option nextType = "overseer" nextId = "firsttaskOS3a">
 		<text>What will I find inside?</text>
 	</option>
-	<option nextType = "player" nextID = "firsttaskOS3b">
+	<option nextType = "overseer" nextId = "firsttaskOS3b">
 		<text>Can I not?</text>
 	</option>
-	<option nextType = "player" nextID = "firsttaskOS3c">
+	<option nextType = "overseer" nextId = "firsttaskOS3c">
 		<text>I'm not ready for this responsibility.</text>
 	</option>
 </player>
@@ -422,7 +422,7 @@
 	 <text color="hex color value">robot</text>
 	<text>.</text>
 </overseer>
-<overseer id = "firsttaskOS3b" nextType = "player" nextID = "firsttaskPL2">
+<overseer id = "firsttaskOS3b" nextType = "player" nextId = "playerfirsttaskPL2">
 	<text>No just do it</text>
 </overseer>
 <overseer id = "firsttaskOS3c" nextType = "exit" nextScreen = "if nextType is exit then give the id of the screen to eject to">
@@ -430,64 +430,64 @@
 	<variable id="playerName"></variable>
 	<text>. Mostly becuase it should be quite simple, but if you need a moment to re-think your life and how you've come to be here I will allow it.</text>
 </overseer>
-<overseer id = "firsttaskOS4" nextType = "player" nextID = "firsttaskPL3">
+<overseer id = "firsttaskOS4" nextType = "player" nextId = "playerfirsttaskPL3">
 	<text>The next part is very difficult. Do you see the large button on the surface of the robot? Please press the button,</text>
 	<variable id="playerName"></variable>
 	<text>.</text>
 </overseer>
-<player id = "player firsttaskPL3">
+<player id = "playerfirsttaskPL3">
 	<option nextType = "overseer" nextId = "firsttaskOS6">
 		<text>Sure. (Turn on robot)</text>
 	</option>
 	<option nextType = "overseer" nextId = "firsttaskOS6">
 		<text>Okay, but if it starts singing 'Daisy Bell' it's going out the air-lock. (Turn on robot)</text>
 	</option>
-	<option nextType = "player" nextID = "firsttaskOS5">
+	<option nextType = "overseer" nextId = "firsttaskOS5">
 		<text>But it's a spider!</text>
 	</option>
 </player>
-<overseer id = "firsttaskOS5" nextType = "player" nextID = "firsttaskPL3">
+<overseer id = "firsttaskOS5" nextType = "player" nextId = "playerfirsttaskPL3">
 	<text>Are you afraid of arachnids? I will have to note of that for later occasions.</text>
 </overseer>
-<overseer id = "firsttaskOS6" nextType = "player" nextID = "firsttaskPL4">
+<overseer id = "firsttaskOS6" nextType = "player" nextId = "playerfirsttaskPL4">
 	<text>This is the </text>
 	<text color="hex color value">Arachne Personal Assistant Robot</text>
 	<text>. It is programmed to assist you in your experiments and form rudimentary companship while aboard your capsule.</text>
 </overseer>
-<player id = "player firsttaskPL4">
+<player id = "playerfirsttaskPL4">
 	<option nextType = "overseer" nextId = "firsttaskOS7a">
 		<text>Alright, that's really all I need to know.</text>
 	</option>
 	<option nextType = "overseer" nextId = "firsttaskOS7b">
 		<text>What can it do?</text>
 	</option>
-	<option nextType = "player" nextID = "firsttaskOS7c">
+	<option nextType = "overseer" nextId = "firsttaskOS7c">
 		<text>Will it be my friend?</text>
 	</option>
-	<option nextType = "player" nextID = "firsttaskOS7d">
+	<option nextType = "overseer" nextId = "firsttaskOS7d">
 		<text>It's kinda cute.</text>
 	</option>
 </player>
-<overseer id = "firsttaskOS7a" nextType = "overseer" nextID = "firsttaskOS8">
+<overseer id = "firsttaskOS7a" nextType = "overseer" nextId = "firsttaskOS8">
 	<text>Of course.</text>
 </overseer>
-<overseer id = "firsttaskOS7b" nextType = "player" nextID = "firsttaskPL4">
+<overseer id = "firsttaskOS7b" nextType = "player" nextId = "playerfirsttaskPL4">
 	<text>Dozens of useful tasks, though I suppose you would like specifics. If you wish, it can give you help during the various experiments you will be performing though I understand if you desire to them by yourself. It will also clean your personal space to ensure you avoid getting buried in your own filth. Other uses will become apparent when necessary.</text>
 </overseer>
-<overseer id = "firsttaskOS7c" nextType = "player" nextID = "firsttaskPL4">
+<overseer id = "firsttaskOS7c" nextType = "player" nextId = "playerfirsttaskPL4">
 	<text>Are you that desperate already? You can pretend it is your friend, if you like, though it will probably disappoint you.</text>
 </overseer>
-<overseer id = "firsttaskOS7d" nextType = "player" nextID = "firsttaskPL4">
+<overseer id = "firsttaskOS7d" nextType = "player" nextId = "playerfirsttaskPL4">
 	<text>Yes. The spindly legs that attach themselves to any surface, including human skin, along with the variety of sharp tools and implements that are hidden along its surface are among its most endearing qualities. You should try wearing it on your head like a fancy hat.</text>
 </overseer>
-<overseer id = "firsttaskOS8" nextType = "player" nextID = "firsttaskPL5">
+<overseer id = "firsttaskOS8" nextType = "player" nextId = "playerfirsttaskPL5">
 	<text>I will now allow you some time to interact with the </text>
 	<text color="hex color value">Arachne Robot</text>
 	<text>. When you are satisfied, use the </text>
 	<text color="hex color value">sleeping compartment</text>
 	<text> to get some rest. I will contact you at a later point with your next task. </text>
 </overseer>
-<player id = "player firsttaskPL5">
+<player id = "playerfirsttaskPL5">
 	<option nextType = "overseer" nextId = "firsttaskOS9a">
 		<text>Copy,</text>
 		<variable id="overseerName"></variable>
@@ -496,7 +496,7 @@
 	<option nextType = "overseer" nextId = "firsttaskOS9b">
 		<text>Okay, goodnight.</text>
 	</option>
-	<option nextType = "player" nextID = "firsttaskOS9c">
+	<option nextType = "overseer" nextId = "firsttaskOS9c">
 		<text>I'm sleeping in that coffin?</text>
 	</option>
 </player>

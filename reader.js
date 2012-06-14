@@ -7,7 +7,6 @@ onLoad = function(){
 	});
 };
 
-
 parseXML = function(xml){
 	var count = 0;
 	/*
@@ -125,17 +124,35 @@ parseXML = function(xml){
 	 * Function for setting a statement's nextStatement
 	 * ARGS:
 	 * 	statement: the statement itself
-	 * 	id: the id to identify what the statement is in case of error
-	 * 		this is needed as playerStatements do not have ids so a string needs
-	 * 		to be passed to be used instead
+	 * 	id: identify what the statement is in case of error. This is needed 
+	 * 		as playerStatements do not have ids so a string needs to be passed
+	 * 		to be used instead
+	 * 
+	 * All the if statements are for debuging as they help locate the tags in
+	 * the XML that have mislabeled attributes
 	 */
 	function linkNext(statement, id){
 		if (statement.nextType === 'overseer'){
-			statement.setNext(overseerContainer[statement.nextVariable]);
+			var tester = overseerContainer[statement.nextId];
+			if (!tester){
+				console.log('ERROR: ' + statement.nextId + ' is not a valid overseer id ' + id);
+			} else {
+				statement.setNext(tester);
+			}
 		} else if (statement.nextType === 'player'){
-			statement.setNext(playerContainer[statement.nextVariable]);
+			var tester = playerContainer[statement.nextId];
+			if (!tester){
+				console.log('ERROR: ' + statement.nextId + ' is not a valid player id ' + id);
+			} else {
+				statement.setNext(tester);
+			}
 		} else if (statement.nextType === 'popup'){
-			statement.setNext(popupContainer[statement.nextVariable]);
+			var tester = popupContainer[statement.nextId];
+			if (!tester){
+				console.log('ERROR: ' + statement.nextId + ' is not a valid popup id ' + id);
+			} else {
+				statement.setNext(tester);
+			}
 		} else if (statement.nextType === 'exit'){
 			statement.setNext('exit'); //this is VERY temporary
 		} else {
@@ -143,7 +160,10 @@ parseXML = function(xml){
 		}
 	};
 	
-	console.log(overseerContainer[firstStatementId].printText());
+	var activeStatement = overseerContainer[firstStatementId];
+	activeStatement.display();
+	
+	//console.log(activeStatement.printText());
 	
 	/*
 	for (x in overseerContainer){
@@ -161,6 +181,15 @@ parseXML = function(xml){
 	}
 	*/
 }
+
+
+
+
+/*
+ * Statment objects start here
+ */
+
+
 
 /*
  * General parent object that all statements inherit from
@@ -187,10 +216,14 @@ var Statement = klass(function(nextType, nextVariable){
 		this.nextId = nextVariable;
 	}
 	this.texts = [];
+	this.nextStatement = null;
 })
 	.methods({
 		setNext: function(nextStatement){
 			this.nextStatement = nextStatement;
+			if(nextStatement != 'exit'){
+				//console.log(this.nextStatement.id + " attached to " + this.id);
+			};
 		},
 		addText: function(text){
 			this.texts.push(text);
@@ -198,6 +231,25 @@ var Statement = klass(function(nextType, nextVariable){
 		printText: function(){
 			return this.texts.join("");
 		},
+		display: function(){
+			console.log(this.printText());
+			if (this.nextType === 'overseer'){
+				var that = this;
+				$(document).keydown(function(e){
+					if(e.which == 13) {
+						activeStatement = that.nextStatement;
+						activeStatement.display();
+						//that.nextStatement.display();
+					}
+				});
+			} else if (this.nextType === 'player'){
+				this.nextStatement.display();
+			} else if (this.nextType === 'popup'){
+				console.log('next statement is a poup');
+			} else if (this.nextType === 'exit'){
+				console.log('THE END');
+			}
+		}
 	});
 
 var OverseerStatement = Statement.extend(function(nextType, nextVariable, id, highlight){
@@ -218,7 +270,21 @@ var PlayerOptions = klass(function(id){
 })
 	.methods({
 		addStatement: function(statement){
+			statement.setId(this.id + "Statement");
 			this.statementArray.push(statement);
+		},
+		display: function(){
+			for(x in this.statementArray){
+				console.log((parseInt(x)+1) + " " + this.statementArray[x].printText());
+			}
+			
+			var that = this
+			$(document).keypress(function(e){
+				if (((e.which - 48) <= that.statementArray.length) && ((e.which - 48) > 0)){
+					activeStatement = that.statementArray[e.which - 48].nextStatement;
+					activeStatement.display();
+				}
+			});
 		}
 	});
 
@@ -228,12 +294,13 @@ var PlayerOptions = klass(function(id){
  */
 var PlayerStatement = Statement.extend(function(nextType, nextVariable, set_check){
 	this.set_check = set_check; //optional, object containing id and whether or not this statement uses set or check
-	
 })
 	.methods({
+		setId: function(id){
+			this.id = id;
+		},
 		//perform relevant actions for if the player if they chose this decision
 		wasClicked: function(){
-			
 		}
 	});
 
