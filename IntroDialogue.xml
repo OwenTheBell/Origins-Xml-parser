@@ -10,7 +10,6 @@
 		<text>?</text>
 	</overseer>
 
-<!-- 
 <player id = 'player introPL1'>
 	<option nextItem = 'overseer' nextId = 'introOS1a'>
 		<text>Reporting.</text>
@@ -21,12 +20,14 @@
 	<option nextItem ='overseer' nextId = 'introOS1c'>
 		<text>Perillos Capsule</text>
 		<text color = 'hex color value'> occupant</text>
-		<text color>is not here right now; would you like to leave a message?</text>
+		<text>is not here right now; would you like to leave a message?</text>
 	</option>
 	<option nextItem ='overseer' nextId = 'introOS1d'>
 		<text>Where am I? What’s going on? Who are you?</text>
 	</option>
 </player>
+
+<!--
 <overseer id = 'introOS1a' nextItem = 'player' nextId= 'playerintroPL2'>
 	<text>Excellent, are you comfortable in your capsule?</text>
 </overseer>
