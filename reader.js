@@ -16,28 +16,35 @@ parseXML = function(xml){
 	 */
 	var overseerContainer = {};
 	var playerContainer = {};
+	var popupContainer = {};
+	
+	var firstStatementId = null;
+	
 	$(xml).find("overseer").each(function(){
 		var id = $(this).attr('id');
-		var nextItem = $(this).attr('nextItem');
+		if (!firstStatementId){
+			firstStatementId = id;
+		}
+		var nextType = $(this).attr('nextType');
 		var nextVariable = null;
-		if (nextItem === 'exit'){
+		if (nextType === 'exit'){
 			nextVariable = $(this).attr('nextScreen');
 		} else {
 			nextVariable = $(this).attr('nextId');
 		}
 		var overseer = null;
 		if($(this).attr('highlight')){
-			overseer = new OverseerStatement(nextItem, nextVariable, id, $(this).attr('highlight'));
+			overseer = new OverseerStatement(nextType, nextVariable, id, $(this).attr('highlight'));
 		} else {
-			overseer = new OverseerStatement(nextItem, nextVariable, id);
+			overseer = new OverseerStatement(nextType, nextVariable, id);
 		}
-		
-		//add overseers to overseerContainer sorted by id for easy lookup later
-		overseerContainer[overseer.id] = overseer;
 		
 		$(this).find('text').each(function(){
 			overseer.addText($(this).text());
 		});
+		
+		//add overseers to overseerContainer sorted by id for easy lookup later
+		overseerContainer[overseer.id] = overseer;
 		
 	});
 	
@@ -46,9 +53,9 @@ parseXML = function(xml){
 		
 		//now find the different options and add them to player
 		$(this).find('option').each(function(){
-			var nextItem = $(this).attr('nextItem');
+			var nextType = $(this).attr('nextType');
 			var nextVariable = null;
-			if (nextItem === 'exit'){
+			if (nextType === 'exit'){
 				nextVariable = $(this).attr('nextScreen');
 			} else {
 				nextVariable = $(this).attr('nextId');
@@ -61,7 +68,7 @@ parseXML = function(xml){
 				set_check.check = $(this).attr('check');
 			}
 			
-			var statement = new PlayerStatement(nextItem, nextVariable, set_check);
+			var statement = new PlayerStatement(nextType, nextVariable, set_check);
 			
 			$(this).find('text').each(function(){
 				statement.addText($(this).text());
@@ -69,17 +76,76 @@ parseXML = function(xml){
 			
 			player.addStatement(statement);
 		});
+		
 		playerContainer[player.id] = player;
 	});
 	
+	$(xml).find('popup').each(function(){
+		
+		var id = $(this).attr('id');
+		var nextType = $(this).attr('nextType');
+		var nextVariable = null;
+		if (nextType === 'exit'){
+			nextVariable = $(this).attr('nextScreen');
+		} else {
+			nextVariable = $(this).attr('nextId');
+		}
+		var target = $(this).attr('target');
+		var statement = new PopupStatement(nextType, nextVariable, id, target);
+		
+		$(this).find('text').each(function(){
+			statement.addText($(this).text());
+		});
+		
+		popupContainer[statement.id] = statement;
+	});
+	
 	/*
-	 * Make all the different statements before we string them together
-	 * This means that we can efficiently go back and look stuff up all in one
-	 * swoop rather than needing to wait for stuff to be made so that different
-	 * objects are attached at different times.
+	 * Now that all the statements have been parsed from the XML they need to 
+	 * be attached together using the linkNext function
 	 */
 	
+	for (x in overseerContainer){
+		var overseer = overseerContainer[x];
+		linkNext(overseer, overseer.id);
+	}
 	
+	for (x in playerContainer){
+		var player = playerContainer[x];
+		for (y in player.statementArray){
+			linkNext(player.statementArray[y], player.id + "statement " + y);
+		}
+	}
+	
+	for (x in popupContainer){
+		var popup = popupContainer[x];
+		linkNext(popup, popup.id);
+	}
+	/*
+	 * Function for setting a statement's nextStatement
+	 * ARGS:
+	 * 	statement: the statement itself
+	 * 	id: the id to identify what the statement is in case of error
+	 * 		this is needed as playerStatements do not have ids so a string needs
+	 * 		to be passed to be used instead
+	 */
+	function linkNext(statement, id){
+		if (statement.nextType === 'overseer'){
+			statement.setNext(overseerContainer[statement.nextVariable]);
+		} else if (statement.nextType === 'player'){
+			statement.setNext(playerContainer[statement.nextVariable]);
+		} else if (statement.nextType === 'popup'){
+			statement.setNext(popupContainer[statement.nextVariable]);
+		} else if (statement.nextType === 'exit'){
+			statement.setNext('exit'); //this is VERY temporary
+		} else {
+			console.log("ERROR: " + id + " has an invalid nextType of " + statement.nextType);
+		}
+	};
+	
+	console.log(overseerContainer[firstStatementId].printText());
+	
+	/*
 	for (x in overseerContainer){
 		console.log(overseerContainer[x].printText());
 	}
@@ -89,25 +155,31 @@ parseXML = function(xml){
 			console.log(y + " " + playerContainer[x].statementArray[y].printText());
 		}
 	}
+	
+	for (x in popupContainer){
+		console.log(popupContainer[x].printText());
+	}
+	*/
 }
 
 /*
- * object to store the Overseer parts of a conversation
- * arguments:
- * 	id: identifier for the object
- * 	nextItem: type of the next conversation element to follow
- * 		overseer/player/popup/exit
- * 	nextVariable: can either be the id of the next element if nextItem is overseer/player/popup
- * 		or the id for the screen that should appear after conversation over
- * 	highlight: (optional) id of sprite to highlight on the screentr
+ * General parent object that all statements inherit from
+ * ARGS:
+ * 	nextType: the type of the next statements (overseer/player/popup/arachne/exit)
+ * 	nextVariable: info on where to go. The data type changes based on the value of nextType
+ * 			overseer: id of an overseerStatement
+ * 			player: id of a playerOptions
+ * 			popup: id of a popupStatement
+ * 			arachne: id of an arachneStatement
+ * 			exit: id of a Screen that the chat will exit to
  */
 
-//An obvious change would be to have each object handle its own XML parsing
-//just pass it a semiparsed piece of XML as the argument and then have it sort
+//An obvious change would be to have each object handle its own XML parsing.
+//Just pass it a semiparsed piece of XML as the argument and then have it sort
 //out the rest during initialization
-var Statement = klass(function(nextItem, nextVariable){
-	this.nextItem = nextItem;
-	if(this.nextItem === 'exit'){
+var Statement = klass(function(nextType, nextVariable){
+	this.nextType = nextType;
+	if(this.nextType === 'exit'){
 		this.exit = true;
 		this.nextScreen = nextVariable;
 	} else {
@@ -117,22 +189,29 @@ var Statement = klass(function(nextItem, nextVariable){
 	this.texts = [];
 })
 	.methods({
-		setNextPart: function(nextPart){
-			this.nextConversation = nextPart;
+		setNext: function(nextStatement){
+			this.nextStatement = nextStatement;
 		},
 		addText: function(text){
 			this.texts.push(text);
 		},
 		printText: function(){
 			return this.texts.join("");
-		}
+		},
 	});
 
-var OverseerStatement = Statement.extend(function(nextItem, nextVariable, id, highlight){
+var OverseerStatement = Statement.extend(function(nextType, nextVariable, id, highlight){
 	this.id = id;
 	this.highlight = highlight; //this arugment is optional
 });
 
+/*
+ * Not a statement but still important. Since all player statements
+ * are choice driven we need a class that contains each set of player
+ * statements that are available as a reply to anything said to the player.
+ * Nonplayer statements will point to a playerOptions that contains
+ * reply statements
+ */
 var PlayerOptions = klass(function(id){
 	this.id = id;
 	this.statementArray = [];
@@ -147,7 +226,7 @@ var PlayerOptions = klass(function(id){
  * A player statement can have both a set and a check value, this just needs
  * to be reflected in the input object
  */
-var PlayerStatement = Statement.extend(function(nextItem, nextVariable, set_check){
+var PlayerStatement = Statement.extend(function(nextType, nextVariable, set_check){
 	this.set_check = set_check; //optional, object containing id and whether or not this statement uses set or check
 	
 })
@@ -158,8 +237,9 @@ var PlayerStatement = Statement.extend(function(nextItem, nextVariable, set_chec
 		}
 	});
 
-var PopupStatement = Statement.extend(function(nextItem, nextVariable, id, target){
+var PopupStatement = Statement.extend(function(nextType, nextVariable, id, target){
 	this.id = id;
+	this.target = target;
 })
 	.methods({
 		
