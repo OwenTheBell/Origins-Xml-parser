@@ -157,3 +157,10 @@ var PlayerStatement = Statement.extend(function(nextItem, nextVariable, set_chec
 			
 		}
 	});
+
+var PopupStatement = Statement.extend(function(nextItem, nextVariable, id, target){
+	this.id = id;
+})
+	.methods({
+		
+	});
