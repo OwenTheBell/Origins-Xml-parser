@@ -18,7 +18,7 @@
 	<option nextType ="overseer" nextId = "introOSc">
 		<text>Perillos Capsule</text>
 		<text color = "hex color value"> occupant</text>
-		<text >is not here right now; would you like to leave a message?</text>
+		<text> is not here right now; would you like to leave a message?</text>
 	</option>
 	<option nextType ="overseer" nextId = "introOSd">
 		<text>Where am I? What’s going on? Who are you?</text>

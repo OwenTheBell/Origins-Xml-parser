@@ -41,7 +41,7 @@ parseXML = function(xml){
 		}
 		
 		$(this).find('text').each(function(){
-			overseer.addText($(this).text());
+			overseer.addText(this);
 		});
 		
 		//add overseers to overseerContainer sorted by id for easy lookup later
@@ -72,7 +72,7 @@ parseXML = function(xml){
 			var statement = new PlayerStatement(nextType, nextVariable, set_check);
 			
 			$(this).find('text').each(function(){
-				statement.addText($(this).text());
+				statement.addText(this);
 			});
 			
 			player.addStatement(statement);
@@ -95,7 +95,7 @@ parseXML = function(xml){
 		var statement = new PopupStatement(nextType, nextVariable, id, target);
 		
 		$(this).find('text').each(function(){
-			statement.addText($(this).text());
+			statement.addText(this);
 		});
 		
 		popupContainer[statement.id] = statement;
@@ -122,6 +122,7 @@ parseXML = function(xml){
 		var popup = popupContainer[x];
 		linkNext(popup, popup.id);
 	}
+	
 	/*
 	 * Function for setting a statement's nextStatement
 	 * ARGS:
@@ -223,7 +224,7 @@ var Statement = klass(function(nextType, nextVariable){
 		this.exit = false;
 		this.nextId = nextVariable;
 	}
-	this.texts = [];
+	this.texts = []; //this contains chunks of xml
 	this.nextStatement = null;
 })
 	.methods({
@@ -237,7 +238,16 @@ var Statement = klass(function(nextType, nextVariable){
 			this.texts.push(text);
 		},
 		printText: function(){
-			return this.texts.join("");
+			var textArray = [];
+			for (x in this.texts){
+				var color = $(this.texts[x]).attr('color');
+				if(!color){
+					textArray.push($(this.texts[x]).text());
+				} else {
+					textArray.push($(this.texts[x]).text().toUpperCase());
+				}
+			}
+			return textArray.join("");
 		},
 		update: function(keyValue){
 			if (this.nextType === 'overseer'){
@@ -260,7 +270,7 @@ var Statement = klass(function(nextType, nextVariable){
 			}
 		},
 		draw: function(){
-			console.log(this.texts.join(""));
+			console.log(this.printText());
 		}
 	});
 
