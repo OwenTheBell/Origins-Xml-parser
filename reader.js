@@ -7,6 +7,8 @@ onLoad = function(){
 	});
 };
 
+var active;
+
 parseXML = function(xml){
 	var count = 0;
 	/*
@@ -160,26 +162,67 @@ parseXML = function(xml){
 		}
 	};
 	
-	var activeStatement = overseerContainer[firstStatementId];
-	activeStatement.display();
-	
-	//console.log(activeStatement.printText());
+	active = overseerContainer[firstStatementId];
+	startDialogue();
 	
 	/*
-	for (x in overseerContainer){
-		console.log(overseerContainer[x].printText());
-	}
-	
-	for (x in playerContainer){
-		for (y in playerContainer[x].statementArray){
-			console.log(y + " " + playerContainer[x].statementArray[y].printText());
+	function runDialogue(){
+		active.display();
+		if (active instanceof OverseerStatement){
+			if (active.nextType === 'player'){
+				active = active.nextStatement;
+				runDialogue();
+			} else if (active.nextType === 'popup') {
+				console.log('next statement is a popup');
+			} else if (active.nextType === 'exit'){
+				console.log('THE END');
+			}
 		}
-	}
-	
-	for (x in popupContainer){
-		console.log(popupContainer[x].printText());
-	}
+		$(document).keypress(function(e){
+			if (active instanceof OverseerStatement){
+				if (active.nextType === 'overseer'){
+					if(e.which == 13) {
+						active = active.nextStatement;
+					}
+				} else if (active.nextType === 'player'){
+					active = active.nextStatement;
+					runDialogue();
+				} else if (active.nextType === 'popup'){
+					console.log('next statement is a poup');
+				} else if (active.nextType === 'exit'){
+					console.log('THE END');
+				}
+			} else if (active instanceof PlayerOptions){
+				if (((e.which - 49) < active.statementArray.length) && ((e.which - 49) >= 0)){
+					active = active.statementArray[e.which - 49].nextStatement;
+				}
+			}
+		});
+	};
 	*/
+}
+
+var displayed = false;
+var keepGoing = true;
+
+startDialogue = function(){
+	var dialogueInterval = setInterval(runDialogue, 1000/60);
+	if (!dialogueInterval) clearInterval(dialogueInterval);
+}
+
+runDialogue = function(){
+	if (!displayed){
+		active.draw();
+		displayed = true;
+	}
+	var keyValue = -1;
+	if(inputState.keypressed){
+		keyValue = inputState.getKeyValue();
+	}
+	active.update(keyValue);
+	if (!keepGoing){
+		return "false";
+	}
 }
 
 
@@ -231,24 +274,28 @@ var Statement = klass(function(nextType, nextVariable){
 		printText: function(){
 			return this.texts.join("");
 		},
-		display: function(){
-			console.log(this.printText());
+		update: function(keyValue){
 			if (this.nextType === 'overseer'){
-				var that = this;
-				$(document).keydown(function(e){
-					if(e.which == 13) {
-						activeStatement = that.nextStatement;
-						activeStatement.display();
-						//that.nextStatement.display();
-					}
-				});
+				if (keyValue == 13){
+					active = this.nextStatement;
+					displayed = false;
+				}
 			} else if (this.nextType === 'player'){
-				this.nextStatement.display();
+				active = this.nextStatement;
+				displayed = false;
 			} else if (this.nextType === 'popup'){
-				console.log('next statement is a poup');
+				console.log("Next statement is a popup");
+				keepGoing = false;
 			} else if (this.nextType === 'exit'){
-				console.log('THE END');
+				console.log("THE END!!!!");
+				keepGoing = false;
+			} else {
+				console.log("ERROR: " + this.id + " has an invalid nextType");
+				keepGoing = false;
 			}
+		},
+		draw: function(){
+			console.log(this.texts.join(""));
 		}
 	});
 
@@ -273,18 +320,25 @@ var PlayerOptions = klass(function(id){
 			statement.setId(this.id + "Statement");
 			this.statementArray.push(statement);
 		},
-		display: function(){
+		update: function(keyValue){
+			if (((keyValue - 49) < this.statementArray.length) && ((keyValue - 49) >= 0)){
+				var next = this.statementArray[keyValue - 49];
+				if (next.nextType === 'exit'){
+					console.log('THE END!!!!');
+					keepGoing = false;
+				} else if (next.nextType === 'popup'){
+					console.log("next up is a popup");
+					keepGoing = false;
+				} else {
+					active = this.statementArray[keyValue - 49].nextStatement;
+					displayed = false;
+				}
+			}
+		},
+		draw: function(){
 			for(x in this.statementArray){
 				console.log((parseInt(x)+1) + " " + this.statementArray[x].printText());
 			}
-			
-			var that = this
-			$(document).keypress(function(e){
-				if (((e.which - 48) <= that.statementArray.length) && ((e.which - 48) > 0)){
-					activeStatement = that.statementArray[e.which - 48].nextStatement;
-					activeStatement.display();
-				}
-			});
 		}
 	});
 
