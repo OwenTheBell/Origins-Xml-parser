@@ -1,41 +1,41 @@
 <dialogue>
-<overseer id = "introOS1" nextType = "player" nextId = "playerintroPL1">
-	<text>Perillos Capsule</text>
-	<text color= "hex color value"> occupant</text> 
+<overseer id = "introOS1" nextType = "player" nextId = "player introPL1">
+	<text> Perillos Capsule</text>
+	<text color= "hex color value"> occupant </text> 
 	<text>, this is the</text>
-	<text color = "hex color value"> MINOS Overseer</text>
+	<text color = "hex color value">MINOS Overseer</text>
 	<text>. Do you copy?</text>
 	<text color = "hex color value"> Occupant</text>
 	<text>?</text>
 </overseer>
-<player id = "playerintroPL1">
-	<option nextType = "overseer" nextId = "introOS1a">
+<player id = "player introPL1">
+	<option nextType = "overseer" nextId = "introOSa">
 		<text>Reporting.</text>
 	</option>
-	<option nextType ="overseer" nextId = "introOS1b">
+	<option nextType ="overseer" nextId = "introOSb">
 		<text>Hello, how are you doing?</text>
 	</option>
-	<option nextType ="overseer" nextId = "introOS1c">
+	<option nextType ="overseer" nextId = "introOSc">
 		<text>Perillos Capsule</text>
 		<text color = "hex color value"> occupant</text>
 		<text >is not here right now; would you like to leave a message?</text>
 	</option>
-	<option nextType ="overseer" nextId = "introOS1d">
+	<option nextType ="overseer" nextId = "introOSd">
 		<text>Where am I? What’s going on? Who are you?</text>
 	</option>
 </player>
-<overseer id = "introOS1a" nextType = "player" nextId= "playerintroPL2">
+<overseer id = "introOSa" nextType = "player" nextId= "playerintroPL2">
 	<text>Excellent, are you comfortable in your capsule?</text>
 </overseer>
-<overseer id = "introOS1b" nextType = "player" nextId= "playerintroPL2">
+<overseer id = "introOSb" nextType = "player" nextId= "playerintroPL2">
 	<text>A little distressed by your cheeriness at your current situation, but otherwise healthy… "How are you"?</text>
 </overseer>
-<overseer id = "introOS1c" nextType = "player" nextId= "playerintroPL2">
+<overseer id = "introOSc" nextType = "player" nextId= "playerintroPL2">
 	<text>Absolutely hilarious,</text>
 	<text color = "hex color value">occupant</text>
 	<text>, I can already tell our relationship is destined to blossom. Are you feeling comfortable in your capsule?</text>
 </overseer>
-<overseer id = "introOS1d" nextType = "player" nextId= "playerintroPL2">
+<overseer id = "introOSd" nextType = "player" nextId= "playerintroPL2">
 	<text>Well it seems you have conveniently forgotten the last dozen hours or so. How fortunate. You are currently aboard a </text>
 	<text color = "hex color value">Project Daedalus Perillos Capsule</text>
 	<text>. It is designed for a single</text>
@@ -48,7 +48,7 @@
 	<option nextType = "overseer" nextId = "introOS2a">
 		<text>Fine, thank you.</text>
 	</option>
-<option id="introOptionDial1X" nextType = "overseer" nextId = "introOS2b" set= "introOptionDial1Y">
+<option id="introOptionDial1X" nextType = "overseer" nextId = "introOS2b" set= "check1">
 		<text>Fantastic! I’m in space!</text>
 	</option>
 	<option nextType = "overseer" nextId = "introOS2c">
@@ -77,7 +77,7 @@
 	<option nextType ="overseer" nextId = "introOS3">
 		<text>Umm…Thanks for that I guess.</text>
 	</option>
-	<option id= "introOptionDial1Y" nextType ="overseer" nextId = "introOS3" check= "introOptionDial1X">
+	<option id= "introOptionDial1Y" nextType ="overseer" nextId = "introOS3" check= "check1">
 		<text>Woah! That’s deep, man. Really puts things into perspective.</text>
 	</option>
 </player>
@@ -90,7 +90,7 @@
 	<option nextType = "overseer" nextId = "introOS4a">
 		<text>I have a name you know.</text>
 	</option>
-	<option id = "introOptionDial2X" nextType ="overseer" nextId = "introOS4b" set = "introOptionDial2Y">
+	<option id = "introOptionDial2X" nextType ="overseer" nextId = "introOS4b" set = "check2">
 		<text>Calling me</text>
 		<text color = "hex color value"> occupant</text>
 		<text> must get boring.</text>
@@ -115,7 +115,7 @@
 	<option nextType = "overseer" nextId = "introOS5b">
 		<text>Well if you are going to be like that, I don't even want to tell you my name!</text>
 	</option>
-	<option id = "introOptionDial2Y" nextType ="overseer" nextId = "introOS5c" check = "introOptionDial2X">
+	<option id = "introOptionDial2Y" nextType ="overseer" nextId = "introOS5c" check = "check2">
 		<text>Oh, I see your point. That's a good point.</text>
 	</option>
 </player>
@@ -254,16 +254,16 @@
 	<text>Are you ready to begin?</text>
 </overseer>
 <player id = "playerintroPL8">
-	<option nextType = "overseer" nextId = "introOS19a">
+	<option nextType ="overseer" nextId = "introOS19a">
 		<text>I need a little more time to look around.</text>
 	</option>
-	<option nextType = "overseer" nextId = "introOS19b">
+	<option nextType ="overseer" nextId = "introOS19b">
 		<text>I'm ready now.</text>
 	</option>
 	<option nextType ="overseer" nextId = "introOS19c">
 		<text>i have some questions actually.</text>
 	</option>
-	<option id = "introOptionDial3X" nextType ="overseer" nextId = "introOS5c" set = "introOptionDial3Y">
+	<option id = "introOptionDial3X" nextType ="overseer" nextId = "introOS5c" set = "check3">
 		<text>Why is the bathroom over my water and food dispenser?</text>
 	</option>
 </player>
@@ -357,7 +357,7 @@
 	<option nextType = "overseer" nextId = "introOS23b">
 		<text>Can't I just get a bigger capsule then?</text>
 	</option>
-	<option id = "introOptionDial3Y"  nextType = "player" nextId = "playerintroPL9" check = "introOptionDial3Y">
+	<option id = "introOptionDial3Y"  nextType = "player" nextId = "playerintroPL9" check = "check3">
 		<text>So there is less gravity in the bathroom then?!</text>
 	</option>
 	<option nextType = "player" nextId = "playerintroPL9">
@@ -398,7 +398,7 @@
 	 <text color="hex color value">Main Quarter</text>
 	<text>. Go up to the componet and I will instruct you further.</text>
 </overseer>
-<overseer id = "firsttaskOS2" nextType = "player" nextId = "playerfirsttaskPL2">
+<overseer id = "firsttaskOS2b" nextType = "player" nextId = "playerfirsttaskPL2">
 	<text>Please open the storage unit, </text>
 	<variable id="playerName"></variable>
 	<text>.</text>

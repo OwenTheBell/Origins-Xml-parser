@@ -1,7 +1,7 @@
 onLoad = function(){
 	$.ajax({
 		type: "GET",
-		url: "IntroDialogue.xml",
+		url: "IntroDial.xml",
 		dataType: "xml",
 		success: parseXML
 	});
@@ -114,7 +114,7 @@ parseXML = function(xml){
 	for (x in playerContainer){
 		var player = playerContainer[x];
 		for (y in player.statementArray){
-			linkNext(player.statementArray[y], player.id + "statement " + y);
+			linkNext(player.statementArray[y], player.id + "statement" + y);
 		}
 	}
 	
@@ -164,46 +164,11 @@ parseXML = function(xml){
 	
 	active = overseerContainer[firstStatementId];
 	startDialogue();
-	
-	/*
-	function runDialogue(){
-		active.display();
-		if (active instanceof OverseerStatement){
-			if (active.nextType === 'player'){
-				active = active.nextStatement;
-				runDialogue();
-			} else if (active.nextType === 'popup') {
-				console.log('next statement is a popup');
-			} else if (active.nextType === 'exit'){
-				console.log('THE END');
-			}
-		}
-		$(document).keypress(function(e){
-			if (active instanceof OverseerStatement){
-				if (active.nextType === 'overseer'){
-					if(e.which == 13) {
-						active = active.nextStatement;
-					}
-				} else if (active.nextType === 'player'){
-					active = active.nextStatement;
-					runDialogue();
-				} else if (active.nextType === 'popup'){
-					console.log('next statement is a poup');
-				} else if (active.nextType === 'exit'){
-					console.log('THE END');
-				}
-			} else if (active instanceof PlayerOptions){
-				if (((e.which - 49) < active.statementArray.length) && ((e.which - 49) >= 0)){
-					active = active.statementArray[e.which - 49].nextStatement;
-				}
-			}
-		});
-	};
-	*/
 }
 
 var displayed = false;
 var keepGoing = true;
+var set_check = {};
 
 startDialogue = function(){
 	var dialogueInterval = setInterval(runDialogue, 1000/60);
@@ -320,9 +285,24 @@ var PlayerOptions = klass(function(id){
 			statement.setId(this.id + "Statement");
 			this.statementArray.push(statement);
 		},
+		/*
+		 * Currently updated() and draw() are called in reverse order, this
+		 * needs to be fixed
+		 */
 		update: function(keyValue){
-			if (((keyValue - 49) < this.statementArray.length) && ((keyValue - 49) >= 0)){
-				var next = this.statementArray[keyValue - 49];
+			//make array of available answers
+			var availableStatements = [];
+			for(x in this.statementArray){
+				var statement = this.statementArray[x];
+				var check = statement.check();
+				if (!check || set_check[check]){
+					availableStatements.push(statement);
+				}
+			}
+			
+			//now that we have an array we can actually check which answers to select
+			if (((keyValue - 49) < availableStatements.length) && ((keyValue - 49) >= 0)){
+				var next = availableStatements[keyValue - 49];
 				if (next.nextType === 'exit'){
 					console.log('THE END!!!!');
 					keepGoing = false;
@@ -330,14 +310,27 @@ var PlayerOptions = klass(function(id){
 					console.log("next up is a popup");
 					keepGoing = false;
 				} else {
-					active = this.statementArray[keyValue - 49].nextStatement;
+					active = availableStatements[keyValue - 49].nextStatement;
+					var set = availableStatements[keyValue - 49].set();
+					//if the selected statement has a set variable, set it for later
+					if (set){
+						set_check[set] = "true";
+					}
 					displayed = false;
 				}
 			}
 		},
 		draw: function(){
+			var iter = 1;
 			for(x in this.statementArray){
-				console.log((parseInt(x)+1) + " " + this.statementArray[x].printText());
+				var statement = this.statementArray[x];
+				var check = statement.check();
+				//Only display an option if it does not have a check value, or
+				//if it's check value is inside set_check
+				if (!check || set_check[check]){
+					console.log(iter + " " + this.statementArray[x].printText());
+					iter++;
+				}
 			}
 		}
 	});
@@ -353,8 +346,11 @@ var PlayerStatement = Statement.extend(function(nextType, nextVariable, set_chec
 		setId: function(id){
 			this.id = id;
 		},
-		//perform relevant actions for if the player if they chose this decision
-		wasClicked: function(){
+		set: function(){
+			return this.set_check.set;
+		},
+		check: function(){
+			return this.set_check.check;
 		}
 	});
 
